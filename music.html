@@ -1,0 +1,307 @@
+<html>
+    <head>
+        <title>Putangina mo bai </title>
+        <link rel="stylesheet" href="style.css">
+        
+    </head>
+    <body class="music">
+        <a href="page2.html#bilat" class="back-button">← Back</a>
+
+    <div class="carousel-wrapper">
+  <!-- Navigation Buttons -->
+  <button class="nav-btn prev-btn" id="prevBtn">❮</button>
+
+      <div class="letter-popup" id="letterPopup">
+  <div class="letter-card">
+    <button class="letter-close" id="letterClose">✕</button>
+
+    <!-- Sarado pa -->
+    <div class="letter-cover" id="letterCover">
+      <h2>hi</h2>
+      <button class="letter-open-btn" id="openLetterBtn">open sesamey</button>
+    </div>
+
+    <!-- Nakatago hanggang pindutin ang button -->
+    <div class="letter-content" id="letterContent">
+      <p>
+        Hatdog
+Akala mo tapos na no? no, meron pa hehe. Siguro, this song na yung makakapag describe nang lahat. I actually heard this song while I was taking a shower and at first nagandahan ako sa tono then I listened to the song closely and wow, na describe nia yung message na gusto kong sabihin sayo paulit ulit. The part where 0:28 “but I’ve changed for the better, and you’re the one to blame” is so true. Upon meeting you, I wasn’t the full me pa, and throughout our journey, andaming nag change sa akin, unti-unti ko shang napansin and I was really proud of myself and I want to thank u for that kasi andami mong pina-realize sa akin talaga, and andami ring nag change sa akin because of you,, andami mong tinuro sa akin without even realizing it and it made me a better person. I want to be the better person sau kaya up until now I’m doing my best to be better for you :) I know I have flaws and I’m not perfect but wala naman perfect sa mundo diba? Hehe.
+
+Talagang this song explains all huhu, like yung “I can’t help but feel guilty when I’m taking up your time” which is true kasi sometimes, whenever we are together, naiisip ko baka mag tampo yung mga friends mo na sila ayro kapag tayo magkasama kahit na ilang beses mo naman na sinasabi sa akin na gets naman nila yun and okay lang yun sa kanila but I can’t help it man pero shempre very thankful pa rin ako na both of us ay gusto rin makapag spend ng time together hehe. Thank u so much sa mga hangout na walang sumbat, you really make me happy—you make my inner child happy and thank u baby!
+
+Sabi sa 2:58 “I’m gonna work on my temper” e you know me naman na pikunin diba hehe, pero I’m still working on it baby, I’m trying my best para ma-control si anger. Ikaw kasi nang aasar ka lagi e pero wag mo ititigil un ha? Suntukin kita pag tinigil mo un talaga aaway talaga tau bai.
+
+Ok kidding aside, the title “be with you” speaks a lot, baby I wanna be with you every single day, for the rest of our lives. (natatae ako habang ginagawa to btw) sounds cheesy right?? Pero I mean it, really. I know we are still students and there’s still a bright future ahead of us pero i hope while building that future is together tayo. Shempre, we’ll still build and grow individually pero meron tayong goal pareho—for our future ganern hehe. 
+
+Happy birthday ulit. Keep on dreaming baby, go for that dream. Mapapakain din ikaw/tayo ng passion na yan, shempre I’ll be by your side sa journey mo na yan, hindi man ako maalam jan sa passion mo kasi di naman ako musician pero u have my 100% na support!! This is the only way where I can bawi sayo,, sa mga ginawa mo for me. Not that much pero I’m really happy seeing u happy on what u are doing, sa kung saan ka talaga masaya which is yang pagbabanda mo. One day, you’ll be successful din, just like your idols and hopefully I’m still your no. 1 fan when that time comes. Happy birthday again, clyde! Thank you so much dahil meron akong ikaw. Mahal na mahal kita!
+
+      </p>
+    </div>
+  </div>
+</div>
+
+<audio id="finalAudio" src="music-bewithu.mp3"></audio>
+  <!-- CENTER CONTENT CONTAINER (Eto ang nag-gugroup para maging centered ang lahat) -->
+  <div class="center-content">
+    
+    <!-- Vinyl Showcase Box -->
+    <div class="vinyl-card" id="vinylCard">
+
+      <!-- Mismong Vinyl Disc -->
+      <div class="vinyl-disc-wrapper" id="vinylDisc">
+        <img src="music-minamahal.png" alt="Vinyl Disc" class="vinyl-img" id="vinylImg">
+      </div>
+
+      <!-- Song Details & Letter -->
+      <div class="song-details">
+        <h2 id="songTitle">Minamahal</h2>
+        <h4 id="artistName">Earl Agustin, Dana Paulene</h4>
+        <p id="dedicatedLetter">
+          The 2:06 verse: "Oh minamahal kita nang lubusan. Ikaw lang at wala nang iba pang makakatumbas pa nitong pag-ibig ko sa'yo na totoo"
+          remember nung binigyan kita ng appreciation letter? na mention ko dun na ito yung song na talagang I dedicated for you? and here we are again, 
+          ito ulit dedicated na naman sha sayo pero shempre, anjan na yung specific verse. alam mo, kapagka naririnig ko talaga yang song na yan, ikaw naaalala ko :) 
+          talagang pinaramdam mo sa akin na love can be this gentle pala, na it's not always walking on egg shells and in survival mode. your love became my safe place—you became my safe place. 
+
+        </p>
+        
+        <audio id="audioPlayer" controls>
+          <source src="music-minamahal.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+    </div>
+
+    <!-- Title at Artist Label (Nasa loob ng center-content para eksaktong nasa ilalim ng vinyl) -->
+    <div class="disc-label-container">
+      <h3 id="bottomTitle">Minamahal</h3>
+      <p id="bottomArtist">Earl Agustin, Dana Paulene</p>
+    </div>
+
+  </div>
+
+  <button class="nav-btn next-btn" id="nextBtn">❯</button>
+</div>
+  <script>
+    
+  const vinylCard = document.getElementById('vinylCard');
+  const vinylDisc = document.getElementById('vinylDisc');
+  const vinylImg = document.getElementById("vinylImg");
+  const audioPlayer = document.getElementById('audioPlayer');
+  
+  const songTitle = document.getElementById('songTitle');
+  const artistName = document.getElementById('artistName');
+  const dedicatedLetter = document.getElementById('dedicatedLetter');
+  const bottomTitle = document.getElementById('bottomTitle');
+  const bottomArtist = document.getElementById('bottomArtist');
+  
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  const playlist = [
+  {
+    title: "Minamahal",
+    artist: "Earl Agustin, Dana Paulene",
+    letter: "The 2:06 verse: 'Oh minamahal kita nang lubusan. Ikaw lang at wala nang iba pang makakatumbas pa nitong pag-ibig ko sa'yo na totoo' remember nung binigyan kita ng appreciation letter? na mention ko dun na ito yung song na talagang I dedicated for you? and here we are again,  ito ulit dedicated na naman sha sayo pero shempre, anjan na yung specific verse. alam mo, kapagka naririnig ko talaga yang song na yan, ikaw naaalala ko :) talagang pinaramdam mo sa akin na love can be this gentle pala, na it's not always walking on egg shells and in survival mode. your love became my safe place—you became my safe place. ",
+    cover: "music-minamahal.png",
+    audio: "music-minamahal.mp3",
+    start: 126
+  },
+  {
+    title: "Paraiso",
+    artist: "It All Started In May",
+    letter: "The verse 3:58 'mamahalin kita, kahit pa sa araw na maging ulyanin tayong dalawa' I've been gatekeeping this song for ages and wow ngayon lalabas na sha sa basement ko. actually, love na love ko tong song na to since I feel like hinehele niya ako and such and wow it has a deeper meaning din pala. nung una ko siyang marinig, oa man or what pero ikaw sumagi agad sa isip ko, especially the last verse, na mamahalin kita kahit na maging ulynanin pa tayong dalawa. man alam mo ulyanin na ako ngayon, ayan na evidence na mamahalin pa rin kita kahit anong mangyari hehe.",
+    cover: "music-paraiso.png", 
+    audio: "music-paraiso.mp3",
+    start:  238
+  },
+  {
+    title: "Tinatangi",
+    artist: "Adie, Chrstn",
+    letter: "2:33 'Tinatangi, tinatangi ko, ikaw lamang mahal. Tinatangi, hindi na maliligaw pagkat ikaw lang ang tinatanaw sa araw-araw' ayan from the word itself, tinatangi man talagang tinatangi kita, ikaw at ikaw lang kahit anong problema pa harapin natin, sayo at sayo ako uuwi at ikaw ang palagi kong pipiliin :) ",
+    cover: "music-tinatangi.png",
+    audio: "music-tinatangi.mp3",
+    start: 153
+  },
+  {
+    title: "love.",
+    artist: "wave to earth",
+    letter: "honestly, the song speaks for itself. the first verse 'Between people between the wind, each person has their own desires painted together' upon searching for it's english translation, they have annotations din pala. sabi don, 'Between people, Between the wind' enforces a visual in people’s mind. Throughout the first verse, it mentions about how each person has different life styles and aspirations, and when there is a mutual interest, it starts to “paint together” into a future where two can be together.' and I thought of us lang din, diba before we have different aspirations, then boom yun pala we have mutual interest, and yung thing na yun is parang naging dala dala ko na, kumbaga, I have you in my heart, and my mind. ang corny pero ayan kasi naisip ko nung binasa ko yung explanation nung kanta ehe. ",
+    cover: "music-love.png",
+    audio: "music-love.mp3"
+  },
+  {
+    title: "Someday",
+    artist: "The Ridleys",
+    letter: "1:09, I wanna be the melting candle to your flame. Your closest friend, your fiercest love, one and the same. Some things will never ever change. I know nito lang naman tayo naging close and nagkaroon ng relationship but I want to be the 'someone' na ituturing mong not only the girl you love but also the girl na friend, like katuwang mo sa hirap at ginhawa na ibabato sa iyo—sa atin ng buhay ",
+    cover: "music-someday.png",
+    audio: "music-someday.mp3",
+    start: 69
+  },
+  {
+    title: "Ang Panata",
+    artist: "Johnoy Danao",
+    letter: "2:46 'Magpakailanman, ika'y tatabihan Sasamahan ko ang yong pangarap Aalagaan ko ang iyong tiwala Pipilitin kong di ka luluha Tapat kang mamahalin sa hirap at ginhawa Luha moy luha ko na rin, aking sinta' sasamahan ko ang iyong pangarap alam mo baby, super happy ko kapag you're talking about your passion which is ayung pagbabanda mo nga. me happy kasi you are happy sa ginagawa mo, kaya ganon na lang din support ko sayo, kahit san man yan man basta masaya ka and masaya ako for you :) tsaka I want to be by your side pag panalo ka, talo, o kung anong condition pa yan, basta ang akin lang, gusto ko ako yung maging no.1 supporter mo sa mga bagay na gusto mong gawin kasi as I've said earlier, happy ako kapag happy ka, you bring me happiness really, kaya keep on dreaming ha? I'll be always by your side no matter what happen man, jan lang aq sa tabi-tabi supporting ur wins sa buhay :) kasi ganoon ka sa akin e, u support my wants and sometimes palagi mo sinasabi na 'gawan natin ng paraan' which makes my nervous system calm down. kaya sa ganitong way ko na lang din naiisip na bumawi sayo :) ",
+    cover: "music-panata.png",
+    audio: "music-panata.mp3",
+    start: 166
+  },
+  {
+    title: "Intertwine",
+    artist: "Over October, The Ridleys",
+    letter: "0:21 'If I could tell you all the things you are to me, I'd try to fit them all inside this song, The words I say won't give our love, no justice, cause what we have's a blessing from Above', another one is 2:26 'If I could tell you all the times I prayed to Him, you would find them sev'ral hours long (Ooh-ooh). But I heard the heart speaks louder than a million voices raised Now, the answer to my loudest prayer is standing here today' ang galing lang kasi I never thought na this music holds a deeper meaning. nung una kong narinig to, naisip ko na wow hinehele ako okay add to liked songs then nung narinig ko ulit and binasa ko lyrics, wow, ayun pala meaning niya. yung part na 'cause what we have's a blessing from Above' which is true, akala ko hindi na darating yung turn ko, na turn kong mahalin nang tama at matrato nang tama and hinulog ka niya that's why it's indeed a blessing from Above :). also yung part na 'Now, the answer to my loudest pray'r is standing here today' is so true, even though I already have you na, I kept praying pa rin na may God guide us sa journey natin, and continue on guiding us. I once prayed to him na if you're not the one for me, he should remove you from my life. at first tatakot pa ako non pero ayun, he did not remove you from my life, he made you stay lalo na nung crucial moment natin together. and I'm very very veeery thankful to him na he gave me you, he gave me someone na nakapag pafeel sa akin na love can be gentle, and warm :) that's why I dedicate this song to you ",
+    cover: "music-intertwine.png",
+    audio: "music-intertwine.mp3",
+    start: 21
+  }
+];
+
+  let currentIndex = 0;
+  let fadeInterval = null;
+
+   function loadSong(index) {
+    if (fadeInterval) {
+    clearInterval(fadeInterval);
+    fadeInterval = null;
+  }
+    const song = playlist[index];
+  if (!song) return;
+
+  const titleText = song.title || song.song_name || "";
+  const artistText = song.artist || song.song_artist || "";
+  const letterText = song.letter || song.song_letter || "";
+  const coverSrc = song.cover || song.song_cover || "";
+  const audioSrc = song.audio || song.song_audio || "";
+
+  // Baguhin ang text sa letter box
+  if (songTitle) songTitle.textContent = titleText;
+  if (artistName) artistName.textContent = artistText;
+  if (dedicatedLetter) dedicatedLetter.textContent = letterText;
+
+  // Baguhin ang text sa ilalim ng vinyl
+  if (bottomTitle) bottomTitle.textContent = titleText;
+  if (bottomArtist) bottomArtist.textContent = artistText;
+
+  // Baguhin ang Vinyl cover at Audio file
+  if (vinylImg && coverSrc) vinylImg.src = coverSrc;
+  
+  if (audioPlayer) {
+    audioPlayer.pause();          // PARAPATIGILIN ANG TUMUTUGTOG NA KANTA
+    audioPlayer.currentTime = 0;  // I-RESET SA SIMULA (0:00)
+    if (audioSrc) {
+      audioPlayer.src = audioSrc;
+      audioPlayer.load();         // I-LOAD LANG, WALANG PLAY!
+    }
+  }
+}
+
+  // Function para sa Smooth Fade In
+  function startFadeIn(targetTime = 121) {
+    clearInterval(fadeInterval);
+    audioPlayer.currentTime = targetTime; // Timestamp (e.g., 2:01 = 121 seconds)
+    audioPlayer.volume = 0;
+    
+    // Siguraduhing naka-play
+    const playPromise = audioPlayer.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        fadeInterval = setInterval(() => {
+          if (audioPlayer.volume < 0.9) {
+            audioPlayer.volume = Math.min(1, audioPlayer.volume + 0.05);
+          } else {
+            audioPlayer.volume = 1;
+            clearInterval(fadeInterval);
+          }
+        }, 50); // Bawat 50ms magdadagdag ng volume
+      }).catch(err => console.log("Autoplay blocked:", err));
+    }
+  }
+
+  // Smooth Fade Out (Mula current volume pababa sa 0 bago ipause)
+  function startFadeOut() {
+    clearInterval(fadeInterval);
+
+    fadeInterval = setInterval(() => {
+      // Bawasan ang volume
+      if (audioPlayer.volume > 0.05) {
+        audioPlayer.volume = Math.max(0, audioPlayer.volume - 0.05);
+      } else {
+        // Kapag 0 na ang volume, saka pa lang i-pause at reset
+        audioPlayer.volume = 0;
+        audioPlayer.pause();
+        clearInterval(fadeInterval);
+      }
+    }, 40); // Bawat 40ms babawasan ang volume para smooth fade out sa loob ng ~1 second
+  }
+
+  // Click Trigger para sa Vinyl Disc
+  if (vinylDisc && vinylCard && audioPlayer) {
+    vinylDisc.addEventListener('click', () => {
+      const wasOpen = vinylCard.classList.contains('is-open'); // bukas ba BAGO pinindot?
+      const isLastSong = currentIndex === playlist.length - 1;
+
+      if (wasOpen) {
+        // SINASARA na niya
+        vinylCard.classList.remove('is-open');
+        startFadeOut();
+
+        if (isLastSong) {
+          setTimeout(showLetterPopup, 800);
+        }
+      } else {
+        // BINUBUKSAN pa lang niya
+        vinylCard.classList.add('is-open');
+        startFadeIn(playlist[currentIndex].start || 0);
+      }
+    });
+  }
+const letterPopup   = document.getElementById('letterPopup');
+const letterCard    = document.querySelector('.letter-card');
+const openLetterBtn = document.getElementById('openLetterBtn');
+const letterClose   = document.getElementById('letterClose');
+const finalAudio    = document.getElementById('finalAudio');
+
+function showLetterPopup() {
+  letterCard.classList.remove('opened'); // laging sarado pag lumabas
+  letterPopup.classList.add('show');
+}
+
+function hideLetterPopup() {
+  letterPopup.classList.remove('show');
+  finalAudio.pause();
+  finalAudio.currentTime = 0;
+  try { localStorage.setItem('visited_music', '1'); } catch (e) {}
+}
+
+openLetterBtn.addEventListener('click', () => {
+  letterCard.classList.add('opened');   // lalabas ang letter
+  audioPlayer.pause();                  // pigilan ang main player
+  finalAudio.currentTime = 0;
+  finalAudio.volume = 1;
+  finalAudio.play();                    // sabay play ng music
+});
+
+letterClose.addEventListener('click', hideLetterPopup);
+  nextBtn.addEventListener('click', () => {
+    // Isara muna ang card at itigil ang audio kapag nagpalit ng track
+    vinylCard.classList.remove('is-open');
+    startFadeOut();
+
+    currentIndex = (currentIndex + 1) % playlist.length;
+    loadSong(currentIndex);
+  });
+
+  // Prev Track
+  prevBtn.addEventListener('click', () => {
+    vinylCard.classList.remove('is-open');
+    startFadeOut();
+
+    currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+    loadSong(currentIndex);
+  });
+
+    </script>
+    <script>
+  try { localStorage.setItem('visited_music', '1'); } catch (e) {}
+</script>
+  </body>
+  </html>

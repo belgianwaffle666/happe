@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>museum ni usagi</title>
+<style>
+  :root {
+    --wall: #ffd7f3;
+    --wall-low: #ffc8e7;
+    --floor: #ecd6c4;
+    --floor-h: 22vh;
+    --pink: #b86aae;
+    --pink: #c45a8f;
+    --gold: #ece1c7;
+    --ink: #5b4351;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; font-family: 'Fredoka', cursive, sans-serif; color: var(--ink); }
+ 
+  /* ---------- museum ---------- */
+  #stage { position: fixed; inset: 0; overflow: hidden; background: var(--wall); }
+  #world { position: absolute; top: 0; left: 0; height: 100%; will-change: transform; }
+  .wall  { position: absolute; left: 0; right: 0; top: 0; bottom: var(--floor-h);
+           background:
+             linear-gradient(to bottom, transparent 62%, var(--wall-low) 62%, var(--wall-low) 100%),
+             var(--wall); }
+  .rail  { position: absolute; left: 0; right: 0; bottom: calc(var(--floor-h) + 38%); height: 6px; background: rgba(255,255,255,.7); }
+  .base  { position: absolute; left: 0; right: 0; bottom: var(--floor-h); height: 14px; background: #fff; }
+  .floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h);
+           background: repeating-linear-gradient(90deg, var(--floor) 0 120px, #e4cbb7 120px 122px); }
+ 
+  /* frames */
+  .frame { position: absolute; top: var(--y, 12vh); width: calc(230px * var(--u)); transform: translateX(-50%); text-align: center; }
+  .glow  { position: absolute; left: 50%; top: -60px; width: 340px; height: 420px; transform: translateX(-50%);
+           background: radial-gradient(ellipse at 50% 0, rgba(255,244,205,.85), rgba(255,244,205,0) 70%);
+           opacity: 0; transition: opacity .8s; pointer-events: none; }
+  .frame.on .glow { opacity: 1; }
+  .gilt  { position: relative; padding: 12px; background: var(--gold); border-radius: 6px;
+           box-shadow: 0 8px 18px rgba(80,50,40,.25), inset 0 0 0 3px #e8cd97; }
+  .mat   { position: relative; height: calc(250px * var(--u)); background: #fffaf5; overflow: hidden; }
+  .veil  { position: absolute; inset: 0; display: grid; place-items: center; font-size: 44px; color: #d7c4b3;
+           background: #f3ebe4; transition: opacity .9s; }
+  .art   { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06);
+           transition: opacity .9s, transform 1.4s; }
+  .frame.on .art  { opacity: 1; transform: scale(1); }
+  .frame.on .veil { opacity: 0; }
+  .frame.noimg.on .veil { opacity: 1; }
+  .frame.noimg.on .veil::after { content: "add pic" ; font-size: 16px; position: absolute; bottom: 14px; }
+ 
+  .plaque { margin: 16px auto 0; width: calc(250px * var(--u)); padding: 10px 14px; background: #fff; border-radius: 10px; font-size: max(13px, calc(15px * var(--u))); line-height: 1.35;
+            box-shadow: 0 4px 12px rgba(80,50,40,.18); opacity: 0; transform: translateY(8px); transition: opacity .5s, transform .5s; }
+  .frame.near { z-index: 100; }
+  .frame.near .plaque { opacity: 1; transform: none; }
+  .plaque { max-height: 22vh; overflow-y: auto; }
+ 
+  /* character */
+  #char { position: absolute; bottom: calc(var(--floor-h) - 18px); width: calc(96px * var(--u)); margin-left: calc(-48px * var(--u)); z-index: 5; visibility: hidden; }
+  #char.drop { visibility: visible; animation: drop .95s cubic-bezier(.3,.1,.4,1) both; }
+  #char .body { transform-origin: 50% 100%; }
+  #char img { width: 100%; display: block; filter: drop-shadow(0 6px 4px rgba(80,50,40,.25)); }
+  #char.walk .body { animation: step .32s ease-in-out infinite; }
+  #shadow { position: absolute; left: 50%; bottom: -6px; width: 60px; height: 12px; margin-left: -30px; background: rgba(80,50,40,.22); border-radius: 50%; }
+  @keyframes drop { 0% { transform: translateY(-110vh); } 62% { transform: translateY(0); } 78% { transform: translateY(-46px); }
+                    90% { transform: translateY(0); } 96% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+  @keyframes step { 0%,100% { transform: rotate(-4deg) translateY(0); } 50% { transform: rotate(4deg) translateY(-9px); } }
+ 
+  /* ---------- UI ---------- */
+  .back { position: fixed; top: 18px; left: 18px; z-index: 30; padding: 8px 16px; border-radius: 50px; background: rgba(255,255,255,.85);
+          color: var(--blue); text-decoration: none; font-size: 18px; }
+  #count { position: fixed; top: 18px; right: 20px; z-index: 30; padding: 8px 16px; border-radius: 50px; background: rgba(255,255,255,.85); font-size: 18px; color: var(--pink); }
+  #hint { position: fixed; left: 50%; bottom: 4vh; transform: translateX(-50%); z-index: 30; padding: 10px 20px; border-radius: 50px;
+          background: rgba(255,255,255,.9); font-size: 18px; transition: opacity .6s; }
+  #hint b { display: inline-block; min-width: 30px; padding: 2px 8px; margin: 0 4px; border-radius: 8px; background: var(--pink); color: #fff; text-align: center; }
+  .pad { position: fixed; bottom: 4vh; z-index: 30; width: 64px; height: 64px; border: 0; border-radius: 50%; font: inherit; font-size: 24px;
+         background: rgba(196,90,143,.85); color: #fff; touch-action: none; display: none; }
+  #padL { left: 4vw; } #padR { right: 4vw; }
+  @media (pointer: coarse) { .pad { display: block; } #hint { display: none; } }
+ 
+  #done { position: fixed; left: 50%; top: 14vh; transform: translate(-50%, -20px); z-index: 30; padding: 14px 26px; border-radius: 18px;
+          background: #fff; color: var(--pink); font-size: 20px; text-align: center; opacity: 0; pointer-events: none; transition: opacity .6s, transform .6s;
+          box-shadow: 0 8px 20px rgba(80,50,40,.2); }
+  #done.show { opacity: 1; transform: translate(-50%, 0); }
+ 
+  /* character select */
+  #select { position: fixed; inset: 0; z-index: 40; display: grid; place-content: center; justify-items: center; gap: 28px; padding: 20px;
+            background: #fff0f5; transition: opacity .6s, visibility .6s; }
+  #select.hide { opacity: 0; visibility: hidden; }
+  #select h1 { margin: 0; font-size: clamp(28px, 5vw, 46px); color: var(--blue); text-align: center; }
+  .picks { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+  .pick { width: 160px; padding: 18px 12px 14px; border: 3px solid transparent; border-radius: 22px; background: #fff; font: inherit; color: var(--ink); cursor: pointer;
+          box-shadow: 0 6px 16px rgba(196,90,143,.18); transition: transform .2s, border-color .2s; }
+  .pick img { width: 100px; height: 100px; object-fit: contain; display: block; margin: 0 auto 8px; }
+  .pick:hover, .pick:focus-visible { transform: translateY(-6px); border-color: var(--pink); outline: none; }
+  .pick span { font-size: 18px; }
+ 
+  /* picture na makikita bago ma-reveal ang pic (pinalitan ang diamond) */
+  .veil { font-size: 0; color: transparent; background-color: #f3ebe4; background-position: center; background-size: cover; background-repeat: no-repeat; }
+  .frame.noimg.on .veil::after { color: #d7c4b3; }
+
+  /* text sa lapag pag nakita na ang last pic */
+  .floor-note { position: fixed; left: 50%; bottom: calc(var(--floor-h) * 0.18); transform: translate(-50%, 12px); width: min(520px, 80vw);
+                text-align: center; font-size: max(16px, calc(20px * var(--u))); line-height: 1.4; color: var(--ink);
+                opacity: 0; pointer-events: none; transition: opacity 1s, transform 1s; z-index: 4; }
+  .floor-note.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (prefers-reduced-motion: reduce) { #char.walk .body { animation: none; } }
+</style>
+</head>
+<body>
+ 
+<a class="back" href="page2.html#bilat">← Back</a>
+<div id="count">0 / 0</div>
+ 
+<!-- ============ CHARACTER SELECT ============ -->
+<div id="select">
+  <h1>pick who you wanna be</h1>
+  <div class="picks" id="picks"></div>
+</div>
+ 
+<!-- ============ MUSEUM ============ -->
+<div id="stage">
+  <div id="world">
+    <div class="wall"></div><div class="rail"></div><div class="base"></div><div class="floor"></div>
+    <div id="char"><div class="body"><img id="charImg" alt=""></div><div id="shadow"></div></div>
+  </div>
+</div>
+ 
+<div id="hint">walk with <b>A</b> and <b>D</b></div>
+<button class="pad" id="padL" aria-label="left">◀</button>
+<button class="pad" id="padR" aria-label="right">▶</button>
+<div id="done">you've seen everything 💗<br>pd na ikaw bumalik po</div>
+ 
+<script>
+/* =====================================================
+   EDIT DITO
+   ===================================================== */
+// 3 characters na mapipili (images galing sa folder mo)
+const CHARACTERS = [
+  { name: "usagi",     src: "usagi.png" },
+  { name: "hachiware", src: "hachi.png" },
+  { name: "chiikawa",  src: "chii.png"  }
+];
+ 
+// bawat picture sa museum: src = file ng pic, msg = short message
+// dagdagan o bawasan lang ang listahan, kusa nang aayos ang museum
+const PICS = [
+  { src: "p1.jpg", msg: "hehe dis was at dunkin non, tampo paq sau kasi lagi ka aka pakyu pag mag pic tau" },
+  { src: "p2.jpg", msg: "d masarap drinks nila here pero I was happy naman non kasi I was wit u :)" },
+  { src: "p3.jpg", msg: "whahahaha nagtatanggal ka ng elastics nito e, ang cute lang baby hihi" },
+  { src: "p4.jpg", msg: "ito ung nag sampaloc tau, thank u kasi I was feeling down non and u were down naman to take that sadness away :)" },
+  { src: "p5.jpg", msg: "to ung inaantay natin sila mag lakad and ehhe we cute lang" },
+  { src: "p6.jpg", msg: "hangkyot lang hihi" },
+  { src: "p7.jpg", msg: "and dis was the latest one, sabi mo pa para kang pinya pero nde naman. pogi pogi e" }
+];
+ 
+const SPEED = 300;        // bilis ng lakad (px kada segundo)
+const GAP = 560;          // layo ng bawat frame
+const NEAR = 170;         // gaano kalapit para lumitaw ang pic
+/* ===================================================== */
+ 
+function setScale() {
+  const u = Math.max(0.6, Math.min(innerHeight / 800, innerWidth / 1200, 1.5));
+  document.documentElement.style.setProperty('--u', u);
+}
+setScale();
+addEventListener('resize', setScale);
+ 
+const world = document.getElementById('world');
+const charEl = document.getElementById('char');
+const charImg = document.getElementById('charImg');
+const hint = document.getElementById('hint');
+const count = document.getElementById('count');
+const done = document.getElementById('done');
+ 
+const START_X = 260;
+const FIRST = 900;
+const WORLD_W = FIRST + (PICS.length - 1) * GAP + 700;
+world.style.width = WORLD_W + 'px';
+ 
+/* frames */
+const frames = PICS.map((p, i) => {
+  const x = FIRST + i * GAP;
+  const el = document.createElement('div');
+  el.className = 'frame';
+  el.style.left = x + 'px';
+  const OFFSETS = [14, 4, 18, 8, 20, 6, 16];
+  el.style.setProperty('--y', OFFSETS[i % OFFSETS.length] + 'vh');
+  el.innerHTML =
+    '<div class="glow"></div>' +
+    '<div class="gilt"><div class="mat"><div class="veil">✦</div><img class="art" alt=""></div></div>' +
+    '<div class="plaque"></div>';
+  el.querySelector('.plaque').textContent = p.msg;
+  const img = el.querySelector('.art');
+  img.onerror = () => el.classList.add('noimg');
+  img.src = p.src;
+  world.insertBefore(el, charEl);
+  return { el, x, seen: false };
+});
+count.textContent = '0 / ' + frames.length;
+ 
+/* character select */
+const picks = document.getElementById('picks');
+CHARACTERS.forEach(c => {
+  const b = document.createElement('button');
+  b.className = 'pick';
+  b.innerHTML = '<img src="' + c.src + '" alt=""><span>' + c.name + '</span>';
+  b.onclick = () => start(c);
+  picks.appendChild(b);
+});
+ 
+/* game state */
+let x = START_X, dir = 1, vel = 0, ready = false, last = 0, seenCount = 0;
+const keys = { left: false, right: false };
+ 
+function start(c) {
+  charImg.src = c.src;
+  document.getElementById('select').classList.add('hide');
+  charEl.style.left = x + 'px';
+  setTimeout(() => {
+    charEl.classList.add('drop');
+    charEl.addEventListener('animationend', () => { ready = true; }, { once: true });
+  }, 450);
+  requestAnimationFrame(t => { last = t; loop(t); });
+}
+ 
+/* controls: A at D lang */
+addEventListener('keydown', e => {
+  if (e.code === 'KeyA') keys.left = true;
+  if (e.code === 'KeyD') keys.right = true;
+});
+addEventListener('keyup', e => {
+  if (e.code === 'KeyA') keys.left = false;
+  if (e.code === 'KeyD') keys.right = false;
+});
+addEventListener('blur', () => { keys.left = keys.right = false; });
+ 
+[['padL', 'left'], ['padR', 'right']].forEach(([id, k]) => {
+  const b = document.getElementById(id);
+  b.addEventListener('pointerdown', e => { e.preventDefault(); keys[k] = true; });
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => b.addEventListener(ev, () => { keys[k] = false; }));
+});
+ 
+function loop(t) {
+  const dt = Math.min((t - last) / 1000, 0.05);
+  last = t;
+ 
+  if (ready) {
+    const move = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
+    if (move) {
+      dir = move;
+      x = Math.max(70, Math.min(WORLD_W - 70, x + move * SPEED * dt));
+      hint.style.opacity = 0;
+    }
+    charEl.classList.toggle('walk', !!move);
+    charImg.style.transform = 'scaleX(' + (dir < 0 ? -1 : 1) + ')';
+    charEl.style.left = x + 'px';
+ 
+    frames.forEach(f => {
+      const d = Math.abs(x - f.x);
+      f.el.classList.toggle('near', d < NEAR);
+      if (d < NEAR && !f.seen) {
+        f.seen = true; seenCount++;
+        f.el.classList.add('on');
+        count.textContent = seenCount + ' / ' + frames.length;
+        if (seenCount === frames.length) finish();
+      }
+    });
+  }
+ 
+  /* camera */
+  const vw = innerWidth;
+  const cam = Math.max(0, Math.min(WORLD_W - vw, x - vw / 2));
+  world.style.transform = 'translateX(' + (-cam) + 'px)';
+  requestAnimationFrame(loop);
+}
+
+/* ===== PICTURE BAGO MA-REVEAL ANG PIC (pinalitan ang diamond) ===== */
+const VEIL_IMG = "usagi-dapa.png";   // <-- EDIT DITO: file name ng picture mo (isa para sa lahat)
+// kung gusto mo ng iba-ibang picture kada frame, lagyan ng  veil: "file.png"  ang bawat item sa PICS
+frames.forEach((f, i) => {
+  const v = PICS[i].veil || VEIL_IMG;
+  f.el.querySelector('.veil').style.backgroundImage = 'url("' + v + '")';
+});
+
+/* ===== TEXT SA LAPAG (lalabas pag nakita na ang last pic) ===== */
+const FLOOR_TEXT = "to more blurry pics, countless laughter, ragebait, ugly laughter, and kulitan w/ u baby. I love u so much!";   // <-- EDIT DITO
+const floorNote = document.createElement('div');
+floorNote.className = 'floor-note';
+floorNote.textContent = FLOOR_TEXT;
+document.body.appendChild(floorNote);
+const floorWatch = setInterval(() => {
+  if (frames[frames.length - 1].seen) {
+    setTimeout(() => floorNote.classList.add('show'), 800);
+    clearInterval(floorWatch);
+  }
+}, 200);
+
+try { localStorage.setItem('visited_pic', '1'); } catch (e) {}
+function finish() {
+  // mamarkahan na tapos na siya sa pic page (para sa final popup sa page2)
+  try { localStorage.setItem('visited_pic', '1'); } catch (e) {}
+  setTimeout(() => done.classList.add('show'), 1200);
+  setTimeout(() => done.classList.remove('show'), 6000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,960 @@
+body.page1 {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('0.jpg') !important; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a{
+    font-family: 'Fredoka', cursive, sans-serif;
+    color: #79a3ce;
+    font-size: 64px;
+}
+
+
+body.page-exit {
+    animation: dramaticExit 0.8s forwards ease-in-out;
+}
+
+@keyframes dramaticExit {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.15); /* Lalaki ang buong page */
+        filter: blur(10px);    /* Lalabo nang konti bago mawala */
+    }
+}
+
+h1 {
+    font-family: 'Fredoka', cursive, sans-serif;
+    color: #79a3ce;
+    font-size: 64px;
+}
+h1 .title-box{
+    text-align: right;
+    position: relative;
+    top: 20px;
+    left: 5px;
+    height: 100;
+}
+h1 {
+    font-family: 'Fredoka', cursive, sans-serif;
+    color: #6C92B8;
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+/* IMAGE */
+.main-content-section {
+  background-image: url('1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  min-height: 100vh;
+  
+  overflow-y: auto;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.second-content-section {
+  background-image: url('1.1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+ 
+  width: 100%;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.third-content-section {
+  background-image: url('1.2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+  width: 100%;
+
+  position: relative;
+  display: flex;
+  flex-direction: row;       /* dating column */
+  justify-content: center;
+  align-items: center;
+  gap: 120px;                /* agwat ng pic at vinyl */
+  flex-wrap: wrap;           /* para bumaba sila sa maliit na screen */
+}
+
+.title-box {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 10px;
+
+    width: 100%;
+    /* Pwede mong i-adjust ito para itaas pa ang title sa blank area */
+    transform: translateY( -10px);
+}
+.paper-title{
+    font-family: 'Fredoka', cursive, sans-serif;
+    color: #6a93b8; /* Dusty blue matching your image */
+    font-size: 102px;
+    font-weight: 700;
+    margin-top: 600;
+    margin-bottom: 240px;
+    letter-spacing: 1px;
+    
+
+    text-shadow: 
+        -3px -3px 0 #ffffff,  
+         3px -3px 0 #ffffff,
+        -3px  3px 0 #ffffff,
+         3px  3px 0 #ffffff,
+        -4px  0px 0 #ffffff,
+         4px  0px 0 #ffffff,
+         0px -4px 0 #ffffff,
+         0px  4px 0 #ffffff;
+    
+}
+
+
+
+/* PARAGRAPH */
+.text-box {
+    width: 80%;
+    max-width: 800px;
+    /* Pwede mong itaas/ibaba ang mismong paragraph box para sumakto sa unang guhit */
+    margin-top: 10px;
+    
+
+    /* Pwedeng lagyan ng scrollbar kapag masyadong mahaba ang text */
+    max-height: 110vh;
+    transform: translateY(-190px);
+}
+
+.paper-text{
+    line-height: 100px;
+    font-family: 'Fredoka', cursive, sans-serif;
+    color: #709cdf;
+    font-size: clamp(30px, 4vw, 20px);
+    word-wrap: break-word;
+    text-align: justify;
+    
+    /* Spacing ng bawat linya ng sulat para sumakto sa guhit ng papel */
+    line-height: 60px; 
+    margin: 0;
+}
+.title-box, .text-box {
+    width: 60%;           /* Kukunin ang 90% ng lapad ng screen sa mobile */
+    max-width: 1300px;     /* Mapipigil sa 600px max kapag malaki ang window sa desktop */
+    margin: 0 auto;       /* Para laging nasa gitna */
+    box-sizing: border-box; 
+    padding: 20px;
+}
+
+@keyframes shakeAnimation {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Swabeng galaw */
+}
+
+/* Kapag nakita na sa screen habang nagse-scroll, lilitaw na siya */
+.scroll-reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+.pic-container,
+.music-disc-container {
+    position: static;
+    transform: none;
+    z-index: 10;
+}
+
+.pic-container img {
+    width: 550px;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+.music-disc-container img {
+    width: 500px;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+
+
+.interactive-pic {
+    max-width: 100%; /* Siguraduhing kasya sa box[cite: 3] */
+    height: auto;
+    
+    /* 🎬 ITO ANG SIKRETO para smooth ang effect[cite: 3] */
+    transition: transform 0.3s ease-in-out; 
+}
+
+/* 🎬 Styling kapag TINAPATAN NG CURSOR (:hover) */
+.interactive-pic:hover {
+    transform: scale(1.1); /* Palalakihin nang 10% ang pic[cite: 1, 3] */
+}
+
+.interactive-music-disc {
+    max-width: 100%; /* Siguraduhing kasya sa box[cite: 3] */
+    height: auto;
+    
+    /* 🎬 ITO ANG SIKRETO para smooth ang effect[cite: 3] */
+    transition: transform 0.3s ease-in-out; 
+}
+
+/* 🎬 Styling kapag TINAPATAN NG CURSOR (:hover) */
+.interactive-music-disc:hover {
+    transform: scale(1.1); /* Palalakihin nang 10% ang pic[cite: 1, 3] */
+}
+
+@keyframes spinDisc {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.interactive-music-disc {
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+}
+
+/* Iikot lang kapag tinapatan ng mouse */
+.interactive-music-disc:hover {
+    animation: spinDisc 4s linear infinite;
+}
+.interactive-pic,
+.interactive-music-disc {
+    cursor: pointer; /* Magiging pointer cursor kapag itinapat */
+}
+.back-btn, 
+a.back-button { /* gamitin ang mismong class name ng Back button mo */
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;          /* Nasa ibabaw para mapindot, PERO nasa top-left lang */
+  width: auto;           /* Para hindi humaba o humarang sa gitna ng screen */
+  height: auto;
+}
+
+body.pic {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('2.jpg') !important; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.music {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('3.jpg') !important; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container para sa buong carousel section */
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Base Card kung saan nakatago ang details at naroon ang vinyl */
+.vinyl-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animation para sa umiikot na Vinyl Disc */
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Styling ng Vinyl Disc Box */
+.vinyl-disc-wrapper {
+  width: 1500px;
+  height: 480px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.5s ease;
+  pointer-events: auto;
+}
+
+.vinyl-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Umiikot ang vinyl by default */
+  animation: spinVinyl 6s linear infinite;
+  animation-play-state: paused; 
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+.vinyl-disc-wrapper:hover .vinyl-img {
+  animation-play-state: running;
+}
+.vinyl-card.is-open .vinyl-img {
+  animation-play-state: running;
+}   
+
+/* Song Details / Letter Container */
+.song-details {
+  position: absolute;
+  width: 480px;
+  max-height: 480px;
+  opacity: 0;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+  z-index: 1;
+  background: rgba(228, 148, 181, 0.9);
+  padding-bottom: 70px;
+  border-radius: 19px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.song-details h2 {
+  margin: 20;
+  font-size: 1.6rem;
+  font-weight: bold;
+  font-family: inherit;
+  color: #fffefe;
+}
+.song-details h4 {
+  margin: 20;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: inherit;
+  color: #774959;
+}
+.song-details p {
+  margin: 20;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  font-family: inherit;
+  color: #774959;
+}
+.song-details audio {
+  width: 85%;
+  height: 44px;
+  border-radius: 50px;
+  outline: none;
+  display: block;
+  margin: 15px auto 0 auto; /* Inilalagay sa gitna at binibigyan ng space sa taas */
+  
+  /* Kulay ng Mismong Capsule Capsule Container */
+  background-color: #c45a8f !important; 
+  accent-color: #ffffff;
+  box-shadow: 0 4px 10px rgb(252, 150, 192);
+}
+.song-details audio::-webkit-media-controls-enclosure {
+  background-color: #e7afcb !important;
+  border-radius: 50px;
+}
+.song-details audio::-webkit-media-controls-current-time-display,
+.song-details audio::-webkit-media-controls-time-remaining-display,
+.song-details audio::-webkit-media-controls-play-button,
+.song-details audio::-webkit-media-controls-mute-button,
+.song-details audio::-webkit-media-controls-overflow-button {
+  color: #752b50 !important;
+  filter: invert(1) brightness(2); /* Ginagawang puti ang icons at text */
+}
+
+/* Ginagawang puti ang track bar */
+.song-details audio::-webkit-media-controls-timeline {
+  filter: invert(1) brightness(1.5);
+}
+
+.music-player {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(185, 79, 129, 0.8); /* O kahit anong kulay para may separator */
+  border-top: 1px solid #c24d87; /* Separator line */
+}
+/* KAPAG PINITIK / NA-OPEN ANG CARD (is-open state) */
+.vinyl-card.is-open .vinyl-disc-wrapper {
+  /* Mag-i-slide ang vinyl papuntang kaliwa */
+  transform: translateX(-210px);
+}
+
+.vinyl-card.is-open .song-details {
+  /* Lalabas at mag-i-slide ang details sa kanan */
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-60px, -50%) translateX(110px);
+}
+/* Stylings para sa Navigation Buttons (Prev / Next) */
+.nav-btn {
+  background: rgba(185, 89, 134, 0.6);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s;
+}
+
+.nav-btn:hover {
+  background: rgba(212, 65, 134, 0.9);
+}
+
+/* Container para sa vinyl at label sa ibaba */
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+
+.disc-label-container {
+  position: relative !important;
+  left: auto !important;
+  bottom: auto !important;
+  text-align: center;
+  margin-top: 15px;
+  width: 100%;
+  
+}
+.disc-label-container h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #ff9ebe;
+}
+
+.disc-label-container p {
+  margin: 3px 0 0 0;
+  font-size: 0.9rem;
+  color: #ff9ebe;
+}
+
+/* chiikawa sticker sa unahan loading */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff0f5; /* Cute pinkish background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  z-index: 9999; /* Siguradong nasa ibabaw ng lahat */
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+
+.sticker-dots {
+  display: flex;
+  gap: 15px; /* Agwat sa pagitan ng stickers */
+}
+
+.dot-sticker {
+  width: 50px;  /* Sukat ng sticker mo */
+  height: 50px;
+  object-fit: contain;
+  /* I-apply ang bounce animation */
+  animation: stickerBounce 1.2s infinite ease-in-out;
+}
+
+/* 3. Staggered Delay (DITO MAGMUMUKHANG LOADING DOTS!) */
+.dot-1 { animation-delay: 0s; }
+.dot-2 { animation-delay: 0.2s; }
+.dot-3 { animation-delay: 0.4s; }
+
+/* 4. Ang Galaw (Aakyat at bababa) */
+@keyframes stickerBounce {
+  0%, 100% {
+    transform: translateY(0); /* Normal position */
+  }
+  50% {
+    transform: translateY(-20px); /* Aakyat ng 20px */
+  }
+}
+
+/* 5. Class para itago ang loader kapag tapos na mag-load */
+.loader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@font-face {
+  font-family: 'Internet Friends';
+  src: url('InternetFriends.ttf') format('truetype');
+  font-display: swap;
+}
+.letter-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.letter-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.letter-card {
+  position: relative;
+  width: 70%;
+  max-width: 650px;
+  min-height: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff0f5;
+  border-radius: 19px;
+  padding: 40px 30px 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  transform: scale(0.6);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* pop effect */
+}
+.letter-popup.show .letter-card {
+  transform: scale(1);
+}
+
+.letter-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #b94f81;
+  cursor: pointer;
+}
+
+.letter-cover {
+  text-align: center;
+  color: #b94f81;
+  font-family: 'Fredoka', cursive, sans-serif;
+}
+.letter-open-btn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 50px;
+  background: #c45a8f;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.letter-open-btn:hover { background: #d44186; }
+
+.letter-content {
+  display: none;
+  color: #774959;
+  font-family: 'Internet Friends', 'Fredoka', cursive, sans-serif;
+  font-size: large;
+  font-display: swap;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Kapag nabuksan na */
+.letter-card.opened .letter-cover { display: none; }
+.letter-card.opened .letter-content {
+  display: block;
+  animation: letterFade 0.8s ease;
+}
+@keyframes letterFade {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pic-container a,
+.music-disc-container a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.item-label {
+  display: block;
+  margin-top: 16px;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 32px;          /* overrides the big 64px from your global "a" rule */
+  font-weight: 600;
+  color: #6a93b8;
+
+  /* white outline, same style as your paper-title */
+  text-shadow:
+    -2px -2px 0 #fff,
+     2px -2px 0 #fff,
+    -2px  2px 0 #fff,
+     2px  2px 0 #fff;
+}
+.music-disc-container .item-label {
+  margin-top: 80px;   /* dating 16px, pwede mong dagdagan o bawasan */
+}
+
+.final-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.final-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.final-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* ang stack mismo */
+.final-stack {
+  position: relative;
+  width: min(92vw, 860px);     /* dating min(90vw, 700px) */
+  height: min(82vh, 640px);
+  margin-bottom: 50px;           /* espasyo para sa mga nakasilip sa ilalim */
+  transform: scale(0.6);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.final-popup.show .final-stack {
+  transform: scale(1);
+}
+
+/* bawat card */
+.final-card {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 35px 30px 30px;
+  border-radius: 19px;
+  overflow-y: auto;
+  text-align: center;
+  font-family: 'Fredoka', cursive, sans-serif;
+  color: #774959;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transform-origin: center bottom;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+/* magkakaibang shade para kita ang bawat nakasilip */
+.final-card:nth-child(1) { background: #fff0f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+.final-card:nth-child(2) { background: #ffdfeb; }
+.final-card:nth-child(3) { background: #ffc9de; }
+
+/* posisyon sa stack */
+.final-card[data-pos="0"] { transform: translateY(0) scale(1);       z-index: 3; }
+.final-card[data-pos="1"] { transform: translateY(22px) scale(0.95); z-index: 2; }
+.final-card[data-pos="2"] { transform: translateY(44px) scale(0.90); z-index: 1; }
+
+/* nai-next na */
+.final-card[data-pos="gone"] {
+  transform: translateY(-60px) scale(1.05) rotate(-5deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* nasa likod: hindi pwedeng pindutin */
+.final-card[data-pos="1"],
+.final-card[data-pos="2"] {
+  pointer-events: none;
+}
+
+.final-card h2 { color: #b94f81; margin: 0 0 15px; }
+.final-card h3 { color: #c45a8f; margin: 0 0 15px; font-size: 1.5rem; }
+
+.final-card video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #000;
+  border-radius: 14px;
+}
+
+.final-text {
+  text-align: left;
+  line-height: 1.6;
+  white-space: pre-line;
+  text-align: justify;
+  
+}
+
+.final-hint {
+  margin: 18px 0 0;
+  font-size: 0.9rem;
+  color: #b94f81;
+  opacity: 0.8;
+}
+
+.final-done {
+  margin-top: 20px;
+  padding: 10px 26px;
+  border: none;
+  border-radius: 50px;
+  background: #c45a8f;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.final-done:hover { background: #d44186; }
+
+.gift-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: giftWiggle 1.6s ease-in-out infinite;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.gift-emoji {
+  font-size: 110px;
+  line-height: 1;
+}
+
+.gift-label {
+  font-size: 1rem;
+}
+
+.gift-box.opened {
+  transform: scale(1.5) rotate(10deg);
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes giftWiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  20% { transform: rotate(-8deg) scale(1.05); }
+  40% { transform: rotate(8deg) scale(1.05); }
+  60% { transform: rotate(-5deg); }
+  80% { transform: rotate(5deg); }
+}
+
+.gift-reveal {
+  display: none;
+}
+
+.gift-reveal.open {
+  display: block;
+  animation: giftFadeIn 0.8s ease;
+}
+
+.gift-reveal iframe {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+}
+
+.gift-message {
+  margin-top: 16px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+@keyframes giftFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.gift-wrap {
+  min-height: 0 !important;
+  height: auto !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  display: block !important;
+  white-space: normal !important;
+}
+.gift-img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.gift-box {
+  width: 100%;
+}
+.pass-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 200, 225, 0.75);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .4s, visibility .4s;
+}
+.pass-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pass-card {
+  width: min(90vw, 380px);
+  padding: 30px 24px 20px;
+  background: #fff0f5;
+  border: 4px solid #ffb6d3;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(196, 90, 143, .3);
+  font-family: inherit;
+}
+.pass-card.shake {
+  animation: passShake .4s;
+}
+
+.pass-card h2 {
+  margin: 0 0 18px;
+  color: #c45a8f;
+}
+
+.pass-card input {
+  width: 80%;
+  padding: 12px;
+  font: inherit;
+  font-size: 24px;
+  letter-spacing: 10px;
+  text-align: center;
+  color: #c45a8f;
+  background: #fff;
+  border: 3px solid #ffb6d3;
+  border-radius: 14px;
+  outline: none;
+}
+.pass-card input:focus {
+  border-color: #c45a8f;
+}
+
+.pass-card button {
+  margin-top: 14px;
+  padding: 10px 26px;
+  font: inherit;
+  font-size: 18px;
+  color: #fff;
+  background: #e87bab;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform .2s;
+}
+.pass-card button:hover {
+  transform: scale(1.06);
+}
+
+.pass-error {
+  min-height: 20px;
+  margin: 10px 0 0;
+  color: #d6336c;
+  font-size: 15px;
+}
+
+.pass-hint {
+  margin: 8px 0 0;
+  color: #b86a90;
+  font-size: 14px;
+}
+
+@keyframes passShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}

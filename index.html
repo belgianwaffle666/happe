@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Putangina mo bai </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body class="page1">
+        <div class="navigation-box">
+            <a href="page2.html" id="next-btn" class="next-btn">hi mr. sungit, pindutin mo me hehe</a>
+        </div>
+
+        <!-- PASSWORD POPUP -->
+        <div class="pass-overlay" id="passOverlay">
+          <div class="pass-card">
+            <h2>enter password</h2>
+            <input id="passInput" type="password" inputmode="numeric" maxlength="4" placeholder="• • • •" autocomplete="off">
+            <button id="passBtn" type="button">enter bai</button>
+            <p class="pass-error" id="passError"></p>
+            <p class="pass-hint">hint: nasa somewhere ang password sa letter</p>
+          </div>
+        </div>
+
+    <script>
+        const startBtn = document.getElementById('next-btn');
+        const passOverlay = document.getElementById('passOverlay');
+        const passInput = document.getElementById('passInput');
+        const passBtn = document.getElementById('passBtn');
+        const passError = document.getElementById('passError');
+        const PASSWORD = '0630';
+
+        function goNext() {
+            document.body.classList.add('page-exit');
+            setTimeout(function () {
+                window.location.href = 'page2.html';
+            }, 500);
+        }
+
+        function checkPass() {
+            if (passInput.value === PASSWORD) {
+                passError.textContent = '';
+                passOverlay.classList.remove('show');
+                goNext();
+            } else {
+                passError.textContent = 'mali po hehe, try mo ulit :)';
+                const card = passOverlay.querySelector('.pass-card');
+                card.classList.remove('shake');
+                void card.offsetWidth;
+                card.classList.add('shake');
+                passInput.value = '';
+                passInput.focus();
+            }
+        }
+
+        startBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            passOverlay.classList.add('show');
+            passInput.focus();
+        });
+
+        passBtn.addEventListener('click', checkPass);
+        passInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') checkPass();
+        });
+
+        // click sa labas ng card = isasara
+        passOverlay.addEventListener('click', function (e) {
+            if (e.target === passOverlay) passOverlay.classList.remove('show');
+        });
+    </script>
+    <script src="script.js"></script>
+
+    </body>
+</html>
